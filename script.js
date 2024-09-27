@@ -1,43 +1,43 @@
 const flashcards = [
     {
-        question: "Qual é o maior órgão do corpo humano?",
-        answer: "A pele é o maior órgão do corpo humano."
+        question: "Qual é o carro mais vendido do mundo?",
+        answer: "O Toyota Corolla é frequentemente o carro mais vendido do mundo."
     },
     {
-        question: "Quantos ossos possui o esqueleto humano adulto?",
-        answer: "O esqueleto humano adulto possui 206 ossos."
+        question: "Qual é a principal função do motor em um carro?",
+        answer: "O motor converte combustível em energia para mover o veículo."
     },
     {
-        question: "Qual é a função dos glóbulos vermelhos no sangue?",
-        answer: "Os glóbulos vermelhos transportam oxigênio dos pulmões para o resto do corpo."
+        question: "Qual é a diferença entre um carro elétrico e um carro a gasolina?",
+        answer: "Carros elétricos usam baterias para energia, enquanto os a gasolina usam combustão."
     },
     {
-        question: "Qual é o órgão responsável pela filtração do sangue?",
-        answer: "Os rins são responsáveis pela filtração do sangue."
+        question: "O que é um carro híbrido?",
+        answer: "Um carro híbrido combina um motor a gasolina com um motor elétrico."
     },
     {
-        question: "Qual parte do cérebro é responsável pelo equilíbrio e coordenação?",
-        answer: "O cerebelo é responsável pelo equilíbrio e coordenação."
+        question: "Qual é a velocidade máxima de um Bugatti Veyron?",
+        answer: "O Bugatti Veyron pode atingir até 400 km/h."
     },
     {
-        question: "Quantos litros de sangue o coração bombeia aproximadamente por dia?",
-        answer: "O coração bombeia cerca de 7.570 litros de sangue por dia."
+        question: "O que significa ABS em um carro?",
+        answer: "ABS significa sistema de freios antibloqueio, que ajuda a evitar o bloqueio das rodas."
     },
     {
-        question: "Qual é a molécula responsável pelo transporte de oxigênio no sangue?",
-        answer: "A hemoglobina é a molécula responsável pelo transporte de oxigênio no sangue."
+        question: "Qual é a importância da manutenção regular em um carro?",
+        answer: "Manutenção regular ajuda a garantir a segurança e a eficiência do veículo."
     },
     {
-        question: "Qual é a principal função do fígado?",
-        answer: "O fígado desintoxica o sangue, produz bile e armazena glicose."
+        question: "Qual foi o primeiro carro produzido em massa?",
+        answer: "O Ford Model T é considerado o primeiro carro produzido em massa."
     },
     {
-        question: "Quantos dentes o adulto normalmente possui?",
-        answer: "Um adulto normalmente possui 32 dentes."
+        question: "O que é torque em um carro?",
+        answer: "Torque é a força que faz o carro acelerar, importante para desempenho."
     },
     {
-        question: "Qual é a maior glândula do corpo humano?",
-        answer: "O fígado é a maior glândula do corpo humano."
+        question: "Qual é o carro mais rápido do mundo?",
+        answer: "O Bugatti Chiron Super Sport 300+ detém o recorde de carro mais rápido."
     }
 ];
 
@@ -50,18 +50,15 @@ function showFlashcard(index) {
     const answerElement = document.getElementById('answer');
     const flashcardElement = document.getElementById('flashcard');
 
-    // Verifica se os elementos existem
     if (questionElement && answerElement && flashcardElement) {
         questionElement.textContent = flashcard.question;
         answerElement.textContent = ""; // Limpa a resposta ao mostrar a nova pergunta
 
-        // Atualiza o contador
         const counterElement = document.getElementById('counter');
         if (counterElement) {
             counterElement.textContent = `Flashcard ${index + 1} de ${flashcards.length}`;
         }
 
-        // Rotaciona o card de volta
         flashcardElement.classList.remove('flipped');
     } else {
         console.error("Elementos necessários não encontrados no DOM.");
@@ -84,18 +81,14 @@ function toggleTheme() {
     const body = document.body;
     const themeToggleButton = document.getElementById('theme-toggle');
 
-    if (body && themeToggleButton) {
-        body.classList.toggle('light-mode');
+    body.classList.toggle('light-mode');
 
-        if (body.classList.contains('light-mode')) {
-            themeToggleButton.textContent = "☀️ Mudar Tema";
-            localStorage.setItem('theme', 'light');
-        } else {
-            themeToggleButton.textContent = "🌙 Mudar Tema";
-            localStorage.setItem('theme', 'dark');
-        }
+    if (body.classList.contains('light-mode')) {
+        themeToggleButton.textContent = "☀️ Mudar Tema";
+        localStorage.setItem('theme', 'light');
     } else {
-        console.error("Elementos necessários para mudar o tema não encontrados no DOM.");
+        themeToggleButton.textContent = "🌙 Mudar Tema";
+        localStorage.setItem('theme', 'dark');
     }
 }
 
@@ -125,19 +118,14 @@ document.getElementById('flip').addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     showFlashcard(currentFlashcardIndex);
 
-    // Aplica a preferência de tema armazenada
     const savedTheme = localStorage.getItem('theme');
     const body = document.body;
     const themeToggleButton = document.getElementById('theme-toggle');
 
     if (savedTheme === 'light') {
         body.classList.add('light-mode');
-        if (themeToggleButton) {
-            themeToggleButton.textContent = "☀️ Mudar Tema";
-        }
+        themeToggleButton.textContent = "☀️ Mudar Tema";
     } else {
-        if (themeToggleButton) {
-            themeToggleButton.textContent = "🌙 Mudar Tema";
-        }
+        themeToggleButton.textContent = "🌙 Mudar Tema";
     }
 });
