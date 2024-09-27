@@ -1,43 +1,43 @@
 const flashcards = [
     {
-        question: "Qual é o maior órgão do corpo humano?",
-        answer: "A pele é o maior órgão do corpo humano."
+        question: "Qual é o carro mais vendido no Brasil?",
+        answer: "O Chevrolet Onix é o carro mais vendido no Brasil nos últimos anos."
     },
     {
-        question: "Quantos ossos possui o esqueleto humano adulto?",
-        answer: "O esqueleto humano adulto possui 206 ossos."
+        question: "Qual é a principal função de um filtro de ar?",
+        answer: "O filtro de ar limpa o ar que entra no motor, aumentando a eficiência."
     },
     {
-        question: "Qual é a função dos glóbulos vermelhos no sangue?",
-        answer: "Os glóbulos vermelhos transportam oxigênio dos pulmões para o resto do corpo."
+        question: "O que significa ABS em carros?",
+        answer: "ABS significa Sistema Antibloqueio de Freios, que impede o travamento das rodas."
     },
     {
-        question: "Qual é o órgão responsável pela filtração do sangue?",
-        answer: "Os rins são responsáveis pela filtração do sangue."
+        question: "Qual a diferença entre carro híbrido e elétrico?",
+        answer: "Carros híbridos usam um motor de combustão e um elétrico, enquanto os elétricos são 100% elétricos."
     },
     {
-        question: "Qual parte do cérebro é responsável pelo equilíbrio e coordenação?",
-        answer: "O cerebelo é responsável pelo equilíbrio e coordenação."
+        question: "Qual é o carro mais rápido do mundo?",
+        answer: "O Bugatti Chiron Super Sport 300+ é um dos carros mais rápidos do mundo."
     },
     {
-        question: "Quantos litros de sangue o coração bombeia aproximadamente por dia?",
-        answer: "O coração bombeia cerca de 7.570 litros de sangue por dia."
+        question: "O que é torque em um carro?",
+        answer: "Torque é a força que faz o carro acelerar, influenciando a performance."
     },
     {
-        question: "Qual é a molécula responsável pelo transporte de oxigênio no sangue?",
-        answer: "A hemoglobina é a molécula responsável pelo transporte de oxigênio no sangue."
+        question: "O que faz um catalisador?",
+        answer: "O catalisador reduz a emissão de poluentes do escapamento do carro."
     },
     {
-        question: "Qual é a principal função do fígado?",
-        answer: "O fígado desintoxica o sangue, produz bile e armazena glicose."
+        question: "Qual é a função do óleo do motor?",
+        answer: "O óleo do motor lubrifica as peças e ajuda a resfriar o motor."
     },
     {
-        question: "Quantos dentes o adulto normalmente possui?",
-        answer: "Um adulto normalmente possui 32 dentes."
+        question: "O que é um carro SUV?",
+        answer: "SUV significa 'Sport Utility Vehicle', um carro utilitário esportivo."
     },
     {
-        question: "Qual é a maior glândula do corpo humano?",
-        answer: "O fígado é a maior glândula do corpo humano."
+        question: "O que é uma transmissão automática?",
+        answer: "A transmissão automática troca as marchas sem intervenção do motorista."
     }
 ];
 
@@ -50,18 +50,15 @@ function showFlashcard(index) {
     const answerElement = document.getElementById('answer');
     const flashcardElement = document.getElementById('flashcard');
 
-    // Verifica se os elementos existem
     if (questionElement && answerElement && flashcardElement) {
         questionElement.textContent = flashcard.question;
         answerElement.textContent = ""; // Limpa a resposta ao mostrar a nova pergunta
 
-        // Atualiza o contador
         const counterElement = document.getElementById('counter');
         if (counterElement) {
             counterElement.textContent = `Flashcard ${index + 1} de ${flashcards.length}`;
         }
 
-        // Rotaciona o card de volta
         flashcardElement.classList.remove('flipped');
     } else {
         console.error("Elementos necessários não encontrados no DOM.");
@@ -84,18 +81,14 @@ function toggleTheme() {
     const body = document.body;
     const themeToggleButton = document.getElementById('theme-toggle');
 
-    if (body && themeToggleButton) {
-        body.classList.toggle('light-mode');
-        
-        if (body.classList.contains('light-mode')) {
-            themeToggleButton.textContent = "☀️ Mudar Tema";
-            localStorage.setItem('theme', 'light');
-        } else {
-            themeToggleButton.textContent = "🌙 Mudar Tema";
-            localStorage.setItem('theme', 'dark');
-        }
+    body.classList.toggle('light-mode');
+    
+    if (body.classList.contains('light-mode')) {
+        themeToggleButton.textContent = "☀️ Mudar Tema";
+        localStorage.setItem('theme', 'light');
     } else {
-        console.error("Elementos necessários para mudar o tema não encontrados no DOM.");
+        themeToggleButton.textContent = "🌙 Mudar Tema";
+        localStorage.setItem('theme', 'dark');
     }
 }
 
@@ -107,37 +100,24 @@ document.getElementById('flip').addEventListener('click', () => {
     const flashcard = document.getElementById('flashcard');
     const answerElement = document.getElementById('answer');
 
-    if (flashcard && answerElement) {
-        flashcard.classList.toggle('flipped');
+    flashcard.classList.toggle('flipped');
 
-        const flashcardData = flashcards[currentFlashcardIndex];
-        if (flashcard.classList.contains('flipped')) {
-            answerElement.textContent = flashcardData.answer;
-        } else {
-            answerElement.textContent = "";
-        }
-    } else {
-        console.error("Elementos necessários para virar o flashcard não encontrados no DOM.");
-    }
+    const flashcardData = flashcards[currentFlashcardIndex];
+    answerElement.textContent = flashcard.classList.contains('flipped') ? flashcardData.answer : "";
 });
 
 // Inicializa o primeiro flashcard e aplica a preferência de tema
 document.addEventListener('DOMContentLoaded', () => {
     showFlashcard(currentFlashcardIndex);
 
-    // Aplica a preferência de tema armazenada
     const savedTheme = localStorage.getItem('theme');
     const body = document.body;
     const themeToggleButton = document.getElementById('theme-toggle');
 
     if (savedTheme === 'light') {
         body.classList.add('light-mode');
-        if (themeToggleButton) {
-            themeToggleButton.textContent = "☀️ Mudar Tema";
-        }
+        themeToggleButton.textContent = "☀️ Mudar Tema";
     } else {
-        if (themeToggleButton) {
-            themeToggleButton.textContent = "🌙 Mudar Tema";
-        }
+        themeToggleButton.textContent = "🌙 Mudar Tema";
     }
 });
