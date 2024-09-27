@@ -3,16 +3,16 @@
 
 /* Variáveis de Cores */
 :root {
-    --color-background-dark: #3E1A78;
-    --color-background-light: #E8D6F2;
-    --color-primary-dark: #5B2F91;
-    --color-primary-light: #D1C7E5;
-    --color-text-dark: #FFFFFF;
-    --color-text-light: #000000;
-    --color-accent-dark: #9B59B6;
+    --color-background-dark: #1A1A1A;
+    --color-background-light: #FFFFFF;
+    --color-primary-dark: #2E2E2E;
+    --color-primary-light: #F0F0F0;
+    --color-text-dark: #E0E0E0;
+    --color-text-light: #333333;
+    --color-accent-dark: #6200EE;
     --color-accent-light: #BB86FC;
-    --color-hover-dark: #8E44AD;
-    --color-hover-light: #DA70D6;
+    --color-hover-dark: #3700B3;
+    --color-hover-light: #9A67EA;
 }
 
 /* Estilos Globais */
@@ -28,18 +28,19 @@ body {
 header {
     padding: 20px;
     background-color: var(--color-primary-dark);
-    border-bottom: 5px solid #333;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    border-bottom: 5px solid #333333;
 }
 
 h1 {
     margin: 0;
     font-size: 2.5em;
+    color: var(--color-text-dark);
 }
 
 p {
     margin: 10px 0 20px 0;
     font-size: 1.1em;
+    color: var(--color-text-dark);
 }
 
 #theme-toggle {
@@ -76,15 +77,15 @@ p {
     color: var(--color-text-dark);
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5em;
-    transition: transform 0.6s ease, box-shadow 0.3s ease;
     position: absolute;
     top: 0;
     left: 0;
     backface-visibility: hidden;
+    transition: transform 0.6s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .front {
@@ -104,12 +105,15 @@ p {
 }
 
 .question, .answer {
+    font-size: 1.2em;
     padding: 0 10px;
+    text-align: center;
 }
 
 .navigation {
     display: flex;
     gap: 15px;
+    margin-top: 20px;
 }
 
 button {
@@ -121,7 +125,6 @@ button {
     border-radius: 5px;
     color: #FFFFFF;
     transition: background-color 0.3s, transform 0.2s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 button:hover {
@@ -132,8 +135,10 @@ button:hover {
 .counter {
     margin-top: 20px;
     font-size: 1em;
+    color: var(--color-text-dark);
 }
 
+/* Rodapé */
 footer {
     margin-top: 50px;
     padding: 15px 20px;
@@ -143,7 +148,6 @@ footer {
     bottom: 0;
     width: 100%;
     font-size: 0.9em;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Tema Secundário Claro */
@@ -154,7 +158,15 @@ body.light-mode {
 
 body.light-mode header {
     background-color: var(--color-primary-light);
-    border-bottom: 5px solid #CCCCCC;
+}
+
+body.light-mode #theme-toggle {
+    color: var(--color-text-light);
+}
+
+body.light-mode .front, body.light-mode .back {
+    background-color: var(--color-primary-light);
+    color: var(--color-text-light);
 }
 
 body.light-mode button {
@@ -162,6 +174,22 @@ body.light-mode button {
     color: #000000;
 }
 
-body.light-mode button:hover {
-    background-color: var(--color-hover-light);
+@media (max-width: 500px) {
+    .flashcard {
+        width: 90%;
+        height: 180px;
+    }
+
+    .question, .answer {
+        font-size: 1em;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
 }
