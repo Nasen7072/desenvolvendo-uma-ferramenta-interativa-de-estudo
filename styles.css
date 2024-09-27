@@ -1,123 +1,267 @@
-const flashcards = [
-    {
-        question: "Qual é o carro mais vendido no Brasil?",
-        answer: "O Chevrolet Onix é o carro mais vendido no Brasil nos últimos anos."
-    },
-    {
-        question: "Qual é a principal função de um filtro de ar?",
-        answer: "O filtro de ar limpa o ar que entra no motor, aumentando a eficiência."
-    },
-    {
-        question: "O que significa ABS em carros?",
-        answer: "ABS significa Sistema Antibloqueio de Freios, que impede o travamento das rodas."
-    },
-    {
-        question: "Qual a diferença entre carro híbrido e elétrico?",
-        answer: "Carros híbridos usam um motor de combustão e um elétrico, enquanto os elétricos são 100% elétricos."
-    },
-    {
-        question: "Qual é o carro mais rápido do mundo?",
-        answer: "O Bugatti Chiron Super Sport 300+ é um dos carros mais rápidos do mundo."
-    },
-    {
-        question: "O que é torque em um carro?",
-        answer: "Torque é a força que faz o carro acelerar, influenciando a performance."
-    },
-    {
-        question: "O que faz um catalisador?",
-        answer: "O catalisador reduz a emissão de poluentes do escapamento do carro."
-    },
-    {
-        question: "Qual é a função do óleo do motor?",
-        answer: "O óleo do motor lubrifica as peças e ajuda a resfriar o motor."
-    },
-    {
-        question: "O que é um carro SUV?",
-        answer: "SUV significa 'Sport Utility Vehicle', um carro utilitário esportivo."
-    },
-    {
-        question: "O que é uma transmissão automática?",
-        answer: "A transmissão automática troca as marchas sem intervenção do motorista."
+/* Importação da Fonte */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Variáveis de Cores */
+:root {
+    --color-background-dark: #2C2C54; /* Roxo Escuro */
+    --color-primary-dark: #1F1F1F;   /* Preto Suave */
+    --color-text-dark: #E0E0E0;      /* Cinza Claro */
+    --color-accent-dark: #6200EE;    /* Roxo Vibrante */
+    --color-hover-dark: #3700B3;     /* Roxo Mais Escuro */
+    --color-background-light: #FFFFFF; /* Branco */
+    --color-primary-light: #FFD700;    /* Dourado */
+    --color-text-light: #333333;       /* Cinza Escuro */
+    --color-accent-light: #FFA500;     /* Laranja */
+    --color-hover-light: #FF8C00;      /* Laranja Escuro */
+}
+
+/* Reset de Margens e Padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Wrapper Flexível para Layout Flexbox */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Estilos Globais */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom right, var(--color-background-dark), var(--color-primary-dark));
+    color: var(--color-text-dark);
+    transition: background 0.5s, color 0.5s;
+}
+
+/* Header */
+header {
+    padding: 20px;
+    background-color: rgba(31, 31, 31, 0.8);
+    border-bottom: 5px solid #333333;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+p {
+    margin: 10px 0 20px 0;
+    font-size: 1.1em;
+}
+
+#theme-toggle {
+    background: none;
+    border: 2px solid var(--color-accent-dark);
+    border-radius: 5px;
+    padding: 10px 15px;
+    color: var(--color-text-dark);
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#theme-toggle:hover {
+    background-color: var(--color-accent-dark);
+    color: #FFFFFF;
+}
+
+/* Main Container */
+main.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Flashcard */
+.flashcard {
+    width: 500px;
+    height: 300px;
+    perspective: 1000px;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.front, .back {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(31, 31, 31, 0.9);
+    color: var(--color-text-dark);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.front {
+    transform: rotateY(0deg);
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.flashcard.flipped .front {
+    transform: rotateY(180deg);
+}
+
+.flashcard.flipped .back {
+    transform: rotateY(0deg);
+}
+
+.question, .answer {
+    font-size: 1.5em;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Navegação entre Flashcards */
+.navigation {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.navigation button {
+    flex: 1;
+    padding: 15px 0;
+    font-size: 1.2em;
+    background-color: var(--color-accent-dark);
+    border: none;
+    border-radius: 5px;
+    color: #FFFFFF;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+.navigation button:hover {
+    background-color: var(--color-hover-dark);
+    transform: scale(1.05);
+}
+
+/* Contador de Flashcards */
+.counter {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+/* Rodapé */
+footer {
+    padding: 20px;
+    background-color: rgba(31, 31, 31, 0.8);
+    color: var(--color-text-dark);
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    font-size: 1em;
+}
+
+/* Tema Secundário Claro */
+body.light-mode {
+    background: linear-gradient(to bottom right, var(--color-background-light), var(--color-primary-light));
+    color: var(--color-text-light);
+}
+
+body.light-mode header {
+    background-color: rgba(255, 215, 0, 0.8);
+    border-bottom: 5px solid #CCCCCC;
+}
+
+body.light-mode h1, body.light-mode p {
+    color: var(--color-text-light);
+}
+
+body.light-mode #theme-toggle {
+    border: 2px solid var(--color-accent-light);
+    color: var(--color-text-light);
+}
+
+body.light-mode #theme-toggle:hover {
+    background-color: var(--color-accent-light);
+    color: #000000;
+}
+
+body.light-mode .front, body.light-mode .back {
+    background-color: rgba(255, 215, 0, 0.8);
+    color: var(--color-text-light);
+}
+
+body.light-mode .navigation button {
+    background-color: var(--color-accent-light);
+    color: #000000;
+}
+
+body.light-mode .navigation button:hover {
+    background-color: var(--color-hover-light);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .flashcard {
+        width: 80%;
+        height: 250px;
     }
-];
 
-let currentFlashcardIndex = 0;
+    .navigation {
+        max-width: 90%;
+    }
 
-// Função para exibir o flashcard
-function showFlashcard(index) {
-    const flashcard = flashcards[index];
-    const questionElement = document.getElementById('question');
-    const answerElement = document.getElementById('answer');
-    const flashcardElement = document.getElementById('flashcard');
+    .question, .answer {
+        font-size: 1.3em;
+    }
 
-    if (questionElement && answerElement && flashcardElement) {
-        questionElement.textContent = flashcard.question;
-        answerElement.textContent = ""; // Limpa a resposta ao mostrar a nova pergunta
+    .navigation button {
+        font-size: 1em;
+    }
 
-        const counterElement = document.getElementById('counter');
-        if (counterElement) {
-            counterElement.textContent = `Flashcard ${index + 1} de ${flashcards.length}`;
-        }
+    .counter {
+        font-size: 1em;
+    }
 
-        flashcardElement.classList.remove('flipped');
-    } else {
-        console.error("Elementos necessários não encontrados no DOM.");
+    footer {
+        font-size: 0.9em;
     }
 }
 
-// Navegação entre os flashcards
-document.getElementById('prev').addEventListener('click', () => {
-    currentFlashcardIndex = (currentFlashcardIndex > 0) ? currentFlashcardIndex - 1 : flashcards.length - 1;
-    showFlashcard(currentFlashcardIndex);
-});
+@media (max-width: 500px) {
+    .flashcard {
+        width: 90%;
+        height: 220px;
+    }
 
-document.getElementById('next').addEventListener('click', () => {
-    currentFlashcardIndex = (currentFlashcardIndex < flashcards.length - 1) ? currentFlashcardIndex + 1 : 0;
-    showFlashcard(currentFlashcardIndex);
-});
+    .question, .answer {
+        font-size: 1.1em;
+    }
 
-// Função para mudar o tema
-function toggleTheme() {
-    const body = document.body;
-    const themeToggleButton = document.getElementById('theme-toggle');
+    .navigation button {
+        font-size: 0.9em;
+    }
 
-    body.classList.toggle('light-mode');
-    
-    if (body.classList.contains('light-mode')) {
-        themeToggleButton.textContent = "☀️ Mudar Tema";
-        localStorage.setItem('theme', 'light');
-    } else {
-        themeToggleButton.textContent = "🌙 Mudar Tema";
-        localStorage.setItem('theme', 'dark');
+    h1 {
+        font-size: 2em;
+    }
+
+    footer {
+        font-size: 0.8em;
     }
 }
-
-// Evento para o botão de mudança de tema
-document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-
-// Evento para virar o flashcard
-document.getElementById('flip').addEventListener('click', () => {
-    const flashcard = document.getElementById('flashcard');
-    const answerElement = document.getElementById('answer');
-
-    flashcard.classList.toggle('flipped');
-
-    const flashcardData = flashcards[currentFlashcardIndex];
-    answerElement.textContent = flashcard.classList.contains('flipped') ? flashcardData.answer : "";
-});
-
-// Inicializa o primeiro flashcard e aplica a preferência de tema
-document.addEventListener('DOMContentLoaded', () => {
-    showFlashcard(currentFlashcardIndex);
-
-    const savedTheme = localStorage.getItem('theme');
-    const body = document.body;
-    const themeToggleButton = document.getElementById('theme-toggle');
-
-    if (savedTheme === 'light') {
-        body.classList.add('light-mode');
-        themeToggleButton.textContent = "☀️ Mudar Tema";
-    } else {
-        themeToggleButton.textContent = "🌙 Mudar Tema";
-    }
-});
