@@ -1,40 +1,43 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
+    <link rel="stylesheet" type="text/css" href="styles.css"media="screen" /> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcards Carros</title>
+    <title>Flashcards Carros JDM</title>
+    <!-- Fonte Roboto do Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" media="screen" />
+    <!-- Link para o CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="wrapper">
         <header>
-            <h1>Flashcards sobre Carros</h1>
-            <button id="theme-toggle">🌙 Mudar Tema</button>
+            <h1>Flashcards Carros JDM</h1>
+            <p>Teste seus conhecimentos sobre carros JDM!</p>
+            <button id="theme-toggle">🔴 Alterar Tema</button>
         </header>
         <main class="container">
-            <p class="description">Teste seus conhecimentos sobre carros!</p>
             <div class="flashcard" id="flashcard">
                 <div class="front">
-                    <div class="question" id="question">Qual é o carro mais vendido do mundo?</div>
+                    <div class="question" id="question"></div>
                 </div>
                 <div class="back">
-                    <div class="answer" id="answer">O Toyota Corolla é frequentemente o carro mais vendido do mundo.</div>
+                    <div class="answer" id="answer"></div>
                 </div>
             </div>
             <div class="navigation">
                 <button id="prev">← Anterior</button>
-                <button id="flip">↩️ Virar Flashcard</button>
+                <button id="flip">↩ Virar Flashcard</button>
                 <button id="next">Próximo →</button>
             </div>
-            <div class="counter" id="counter">Flashcard 1 de 10</div>
+            <div class="counter" id="counter"></div>
         </main>
         <footer>
-            <p>&copy; Gabriel H. N°19</p>
+            <p>&copy; 2024 Flashcards Carros JDM By: Seu Nome</p>
         </footer>
     </div>
+    <!-- Link para o JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
