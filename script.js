@@ -1,43 +1,43 @@
 const flashcards = [
     {
-        question: "Qual é o carro mais vendido do mundo?",
-        answer: "O Toyota Corolla é frequentemente o carro mais vendido do mundo."
+        question: "Qual fabricante japonês produz o modelo Supra?",
+        answer: "A Toyota produz o modelo Supra."
     },
     {
-        question: "Qual é a principal função do motor em um carro?",
-        answer: "O motor converte combustível em energia para mover o veículo."
+        question: "Qual é o motor original utilizado no Nissan GT-R R35?",
+        answer: "O Nissan GT-R R35 utiliza o motor VR38DETT de 3.8 litros."
     },
     {
-        question: "Qual é a diferença entre um carro elétrico e um carro a gasolina?",
-        answer: "Carros elétricos usam baterias para energia, enquanto os a gasolina usam combustão."
+        question: "O que significa a sigla JDM?",
+        answer: "JDM significa Japanese Domestic Market, referindo-se a produtos destinados ao mercado japonês."
     },
     {
-        question: "O que é um carro híbrido?",
-        answer: "Um carro híbrido combina um motor a gasolina com um motor elétrico."
+        question: "Qual carro é conhecido como o 'Godzilla' das estradas?",
+        answer: "O Nissan GT-R é conhecido como o 'Godzilla' das estradas."
     },
     {
-        question: "Qual é a velocidade máxima de um Bugatti Veyron?",
-        answer: "O Bugatti Veyron pode atingir até 400 km/h."
+        question: "Qual é o principal concorrente do Honda Civic no mercado JDM?",
+        answer: "O Toyota Corolla é o principal concorrente do Honda Civic no mercado JDM."
     },
     {
-        question: "O que significa ABS em um carro?",
-        answer: "ABS significa sistema de freios antibloqueio, que ajuda a evitar o bloqueio das rodas."
+        question: "Qual carro é famoso por sua configuração boxer e tração traseira?",
+        answer: "O Subaru Impreza é famoso por sua configuração boxer e tração traseira."
     },
     {
-        question: "Qual é a importância da manutenção regular em um carro?",
-        answer: "Manutenção regular ajuda a garantir a segurança e a eficiência do veículo."
+        question: "Qual modelo da Mazda é conhecido por seu motor rotativo?",
+        answer: "O Mazda RX-7 é conhecido por seu motor rotativo."
     },
     {
-        question: "Qual foi o primeiro carro produzido em massa?",
-        answer: "O Ford Model T é considerado o primeiro carro produzido em massa."
+        question: "Qual é o carro compacto esportivo produzido pela Honda?",
+        answer: "O Honda S2000 é o carro compacto esportivo produzido pela Honda."
     },
     {
-        question: "O que é torque em um carro?",
-        answer: "Torque é a força que faz o carro acelerar, importante para desempenho."
+        question: "Qual é o principal mercado-alvo do Toyota AE86?",
+        answer: "O Toyota AE86 é popular entre entusiastas de drift e corridas de rua."
     },
     {
-        question: "Qual é o carro mais rápido do mundo?",
-        answer: "O Bugatti Chiron Super Sport 300+ detém o recorde de carro mais rápido."
+        question: "Qual carro é conhecido por seu desempenho no circuito Super GT?",
+        answer: "O Lexus LC é conhecido por seu desempenho no circuito Super GT."
     }
 ];
 
@@ -50,15 +50,18 @@ function showFlashcard(index) {
     const answerElement = document.getElementById('answer');
     const flashcardElement = document.getElementById('flashcard');
 
+    // Verifica se os elementos existem
     if (questionElement && answerElement && flashcardElement) {
         questionElement.textContent = flashcard.question;
         answerElement.textContent = ""; // Limpa a resposta ao mostrar a nova pergunta
 
+        // Atualiza o contador
         const counterElement = document.getElementById('counter');
         if (counterElement) {
-            counterElement.textContent = `Flashcard ${index + 1} de ${flashcards.length}`;
+            counterElement.textContent = Flashcard ${index + 1} de ${flashcards.length};
         }
 
+        // Rotaciona o card de volta
         flashcardElement.classList.remove('flipped');
     } else {
         console.error("Elementos necessários não encontrados no DOM.");
@@ -81,14 +84,18 @@ function toggleTheme() {
     const body = document.body;
     const themeToggleButton = document.getElementById('theme-toggle');
 
-    body.classList.toggle('light-mode');
+    if (body && themeToggleButton) {
+        body.classList.toggle('alt-mode');
 
-    if (body.classList.contains('light-mode')) {
-        themeToggleButton.textContent = "☀️ Mudar Tema";
-        localStorage.setItem('theme', 'light');
+        if (body.classList.contains('alt-mode')) {
+            themeToggleButton.textContent = "🔵 Alterar Tema";
+            localStorage.setItem('theme', 'alt');
+        } else {
+            themeToggleButton.textContent = "🔴 Alterar Tema";
+            localStorage.setItem('theme', 'default');
+        }
     } else {
-        themeToggleButton.textContent = "🌙 Mudar Tema";
-        localStorage.setItem('theme', 'dark');
+        console.error("Elementos necessários para mudar o tema não encontrados no DOM.");
     }
 }
 
@@ -118,14 +125,19 @@ document.getElementById('flip').addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     showFlashcard(currentFlashcardIndex);
 
+    // Aplica a preferência de tema armazenada
     const savedTheme = localStorage.getItem('theme');
     const body = document.body;
     const themeToggleButton = document.getElementById('theme-toggle');
 
-    if (savedTheme === 'light') {
-        body.classList.add('light-mode');
-        themeToggleButton.textContent = "☀️ Mudar Tema";
+    if (savedTheme === 'alt') {
+        body.classList.add('alt-mode');
+        if (themeToggleButton) {
+            themeToggleButton.textContent = "🔵 Alterar Tema";
+        }
     } else {
-        themeToggleButton.textContent = "🌙 Mudar Tema";
-    }
+        if (themeToggleButton) {
+            themeToggleButton.textContent = "🔴 Alterar Tema";
+        }
+    }
 });
